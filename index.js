@@ -31,7 +31,12 @@ let urlSchema=new Schema{
   short: Number
 };
 
-app.post("/api/shorturl/new", bodyParser.urlencoded({extended: false}));
+let Url=mongoose.model("Url", urlSchema);
+let responseObject={};
+
+app.post("/api/shorturl/new", bodyParser.urlencoded({extended: false}), (req,res)=>{
+  res.json(responseObject);
+});
 
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
