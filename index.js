@@ -45,9 +45,20 @@ app.post("/api/shorturl", bodyParser.urlencoded({extended: false}), (req,res)=>{
     if(!err&&!=undefined){
       inputShort=result.short+1;
     }
+    if(!error){
+      Url.findOneAndUpdate(
+        {original: inputUrl['url']},
+        {original: inputUrl['url'], short: inputShort},
+        {new: true, upsert: true}, //upsert creates new entry if it doesn't exist
+        (error, savedUrl)=>{
+          if(!error){
+            responseObject['short_url']=savedUrl.short;
+            res.json(responseObject);
+          }
+        }
+      );
+    }
   });
-  
-  res.json(responseObject);
 });
 
 app.listen(port, function() {
