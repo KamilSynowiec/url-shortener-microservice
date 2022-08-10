@@ -38,6 +38,14 @@ app.post("/api/shorturl", bodyParser.urlencoded({extended: false}), (req,res)=>{
   
   let inputUrl=req.body;
   
+  /* URL validation */
+  let urlRegex = new RegExp(/^(ftp|http|https):\/\/[^ "]+$/);
+  if(inputUrl['url'].match(urlRegex)){
+    res.json({error: "Invalid URL"});
+    return
+  }
+
+  
   let inputShort=1;
   
   /* finding latest short number in database and incrementing it by one to not override previous URLs*/
