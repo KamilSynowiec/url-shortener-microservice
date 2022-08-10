@@ -69,6 +69,21 @@ app.post("/api/shorturl", bodyParser.urlencoded({extended: false}), (req,res)=>{
   });
 });
 
+app.get("/api/shorturl/:input", (req,res)=>{
+  let input=req.params.input;
+  
+  Url.findOne({short: input}, (error, result)=>{
+    if(!error&&result!=undefined){
+      res.redirect(result.original);
+    }
+    else
+    {
+      res.json("URL not found");
+    }
+  });
+ 
+});
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
