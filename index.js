@@ -38,6 +38,15 @@ app.post("/api/shorturl", bodyParser.urlencoded({extended: false}), (req,res)=>{
   
   let inputUrl=req.body;
   
+  let inputShort=1;
+  
+  /* finding latest short number in database and incrementing it by one to not override previous URLs*/
+  Url.findOne({}).sort({short: "desc"}).exec((err, result)=>{
+    if(!err&&!=undefined){
+      inputShort=result.short+1;
+    }
+  });
+  
   res.json(responseObject);
 });
 
