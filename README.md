@@ -1,6 +1,5 @@
 # URL shortener microservice
-
-https://replit.com/join/zknkwtyjed-kamilsynowiec
+You can run my code on the replit online IDE to check how it works: https://replit.com/join/zknkwtyjed-kamilsynowiec
 
 - You can POST a URL to /api/shorturl and get a JSON response with original_url and short_url properties. Here's an example: { original_url : 'https://github.com/KamilSynowiec', short_url : 1}
 
